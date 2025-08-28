@@ -473,39 +473,37 @@ window.addEventListener("scroll", () => {
 
 // Loading animation
 const letters = document.querySelectorAll(".loading-text span");
+const loadingMeme = document.getElementById("loading-meme");
+const nameLoader = document.getElementById("name-loader");
 
 // Animate each letter with stagger
 gsap.to(letters, {
   opacity: 1,
   duration: 1.2,
   stagger: 0.15,
-  onUpdate: function () {
-    letters.forEach((el, i) => {
-      gsap.to(el, {
-        color: "#ffffff",
-        duration: 0.2,
-        delay: i * 0.15,
-      });
-      gsap.to(el, {
-        color: "rgba(255,255,255,0.1)",
-        duration: 0.2,
-        delay: i * 0.15 + 0.4,
-      });
-      gsap.to(el.querySelector("::after"), {
-        opacity: 1,
-        duration: 0.2,
-        delay: i * 0.15,
-      });
-    });
-  },
   onComplete: () => {
-    gsap.to("#loading", {
+    // After text animation, fade out text and fade in meme
+    gsap.to(nameLoader, {
       opacity: 0,
-      duration: 1,
-      delay: 0.5,
+      duration: 0.5,
       onComplete: () => {
-        document.getElementById("loading").style.display = "none";
-      },
+        gsap.to(loadingMeme, {
+          opacity: 1,
+          duration: 0.5,
+          delay: 0.2, // Brief pause before showing meme
+          onComplete: () => {
+            // After meme is shown, fade out the entire loading screen
+            gsap.to("#loading", {
+              opacity: 0,
+              duration: 1,
+              delay: 1.5, // Hold meme for 1.5 seconds
+              onComplete: () => {
+                document.getElementById("loading").style.display = "none";
+              },
+            });
+          }
+        });
+      }
     });
   },
 });
