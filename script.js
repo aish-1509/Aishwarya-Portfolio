@@ -485,29 +485,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const loadingTl = gsap.timeline();
 
   loadingTl
-    // 1. Animate each letter of the name with a stagger
+    // 1. Animate the outlined letters into view
     .to(letters, {
       opacity: 1,
-      duration: 1.2,
+      duration: 1.0,
       stagger: {
         each: 0.1,
         from: "center"
       },
-      ease: "power3.out"
+      ease: "power2.out"
     })
-    // 2. Fade out the name
+    // 2. Animate the fill color and glow
+    .to(letters, {
+      color: "white",
+      textShadow: "0 0 10px rgba(255, 255, 255, 0.8), 0 0 25px rgba(29, 205, 159, 0.8)",
+      duration: 1.0,
+      stagger: {
+        each: 0.1,
+        from: "center"
+      },
+      ease: "power3.inOut"
+    }, "-=0.5") // Overlap with the end of the first animation
+    // 3. Fade out the name
     .to(nameLoader, {
       opacity: 0,
       duration: 0.5,
       ease: "power1.in"
-    }, "+=0.7") // Wait a bit longer after name finishes
-    // 3. Fade in the meme
+    }, "+=0.5")
+    // 4. Fade in the meme
     .to(loadingMeme, {
       opacity: 1,
       duration: 0.7,
       ease: "power2.out"
     })
-    // 4. Hold the meme, then fade out the entire loading screen
+    // 5. Hold the meme, then fade out the entire loading screen
     .to(loadingScreen, {
       autoAlpha: 0, // Use autoAlpha for better performance
       duration: 1,
