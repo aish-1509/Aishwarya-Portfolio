@@ -1075,12 +1075,18 @@ body::after {
 }
 #loading {
   position: fixed;
-  inset: 0;
-  background: #000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg);
   display: flex;
-  align-items: center;
   justify-content: center;
+  /* Nudge content up to align with hero section's text, preventing a "jump" */
+  align-items: center;
+  padding-bottom: 8vh; /* This value nudges the text up to match the hero's alignment */
   z-index: 9999;
+  transition: opacity 1s ease;
 }
 
 /* Font and base letter style */
