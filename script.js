@@ -488,28 +488,33 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Animate each letter of the name with a stagger
     .to(letters, {
       opacity: 1,
-      duration: 1, // Slightly faster for a snappier feel
-      stagger: 0.1,
-      ease: "power2.out"
+      filter: "blur(0px)", // Remove blur
+      transform: "scale(1)", // Return to normal size
+      duration: 1.2,
+      stagger: {
+        each: 0.1,
+        from: "random" // Animate from a random starting point
+      },
+      ease: "power3.out"
     })
     // 2. Fade out the name
     .to(nameLoader, {
       opacity: 0,
       duration: 0.5,
       ease: "power1.in"
-    }, "+=0.5") // Wait half a second after name finishes
+    }, "+=0.7") // Wait a bit longer after name finishes
     // 3. Fade in the meme
     .to(loadingMeme, {
       opacity: 1,
       duration: 0.7,
       ease: "power2.out"
     })
-    // 4. Hold the meme for a longer duration, then fade out the entire loading screen
+    // 4. Hold the meme, then fade out the entire loading screen
     .to(loadingScreen, {
-      autoAlpha: 0, // Use autoAlpha for better performance (handles visibility and opacity)
+      autoAlpha: 0, // Use autoAlpha for better performance
       duration: 1,
       ease: "power2.inOut",
-      delay: 2.5 // Increased from 1.5s to 2.5s
+      delay: 2.5 
     });
 });
 
