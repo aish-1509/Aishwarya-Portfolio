@@ -472,40 +472,45 @@ window.addEventListener("scroll", () => {
 });
 
 // Loading animation
-const letters = document.querySelectorAll(".loading-text span");
-const loadingMeme = document.getElementById("loading-meme");
-const nameLoader = document.getElementById("name-loader");
+document.addEventListener('DOMContentLoaded', () => {
+  const loadingScreen = document.getElementById('loading');
+  const letters = document.querySelectorAll(".loading-text span");
+  const loadingMeme = document.getElementById("loading-meme");
+  const nameLoader = document.getElementById("name-loader");
 
-// Animate each letter with stagger
-gsap.to(letters, {
-  opacity: 1,
-  duration: 1.2,
-  stagger: 0.15,
-  onComplete: () => {
-    // After text animation, fade out text and fade in meme
-    gsap.to(nameLoader, {
+  // Ensure the loading screen is visible at the start
+  gsap.set(loadingScreen, { autoAlpha: 1 });
+
+  // Create a GSAP timeline for a smoother, more controllable sequence
+  const loadingTl = gsap.timeline();
+
+  loadingTl
+    // 1. Animate each letter of the name with a stagger
+    .to(letters, {
+      opacity: 1,
+      duration: 1, // Slightly faster for a snappier feel
+      stagger: 0.1,
+      ease: "power2.out"
+    })
+    // 2. Fade out the name
+    .to(nameLoader, {
       opacity: 0,
       duration: 0.5,
-      onComplete: () => {
-        gsap.to(loadingMeme, {
-          opacity: 1,
-          duration: 0.5,
-          delay: 0.2, // Brief pause before showing meme
-          onComplete: () => {
-            // After meme is shown, fade out the entire loading screen
-            gsap.to("#loading", {
-              opacity: 0,
-              duration: 1,
-              delay: 1.5, // Hold meme for 1.5 seconds
-              onComplete: () => {
-                document.getElementById("loading").style.display = "none";
-              },
-            });
-          }
-        });
-      }
+      ease: "power1.in"
+    }, "+=0.5") // Wait half a second after name finishes
+    // 3. Fade in the meme
+    .to(loadingMeme, {
+      opacity: 1,
+      duration: 0.7,
+      ease: "power2.out"
+    })
+    // 4. Hold the meme for a longer duration, then fade out the entire loading screen
+    .to(loadingScreen, {
+      autoAlpha: 0, // Use autoAlpha for better performance (handles visibility and opacity)
+      duration: 1,
+      ease: "power2.inOut",
+      delay: 2.5 // Increased from 1.5s to 2.5s
     });
-  },
 });
 
 

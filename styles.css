@@ -870,9 +870,6 @@ body::after {
   transition: all 0.3s ease;
   overflow: hidden;
   border: 1px solid rgba(24, 224, 181, 0.3);
-  box-shadow: 
-    0 8px 32px rgba(24, 224, 181, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
 .hero-cta-btn:hover {
@@ -1089,25 +1086,32 @@ body::after {
 
 .loading-meme {
   position: absolute;
-  max-width: 80%;
-  max-height: 80%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 90%;
+  max-height: 90%;
+  width: auto;
+  height: auto;
   object-fit: contain;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  z-index: 10000; /* Ensure it's on top of other loading content */
+  opacity: 0; /* Start hidden */
+  z-index: 10; /* Below the text but above the background */
 }
 
 /* Font and base letter style */
 .loading-text span {
-  font-family: "Special Gothic Expanded One", sans-serif;
-  font-size: clamp(5rem, 15vw, 11rem);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
-  position: relative;
-  display: inline-block;
-  opacity: 0;
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2rem, 10vw, 5rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: white; /* Changed from transparent to white */
+  text-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.5),
+    0 0 15px rgba(255, 255, 255, 0.3),
+    0 0 30px rgba(29, 205, 159, 0.2);
+  -webkit-text-stroke: 0; /* Removed stroke */
+  opacity: 0; /* Start hidden for GSAP */
+  display: inline-block; /* Ensures transforms work correctly */
 }
 
 /* Glowing overlay */
