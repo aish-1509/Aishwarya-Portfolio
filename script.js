@@ -488,12 +488,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Animate each letter of the name with a stagger
     .to(letters, {
       opacity: 1,
-      filter: "blur(0px)", // Remove blur
-      transform: "scale(1)", // Return to normal size
       duration: 1.2,
       stagger: {
         each: 0.1,
-        from: "random" // Animate from a random starting point
+        from: "center"
       },
       ease: "power3.out"
     })
