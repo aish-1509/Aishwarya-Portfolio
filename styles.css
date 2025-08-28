@@ -1082,9 +1082,7 @@ body::after {
   background: var(--bg);
   display: flex;
   justify-content: center;
-  /* Nudge content up to align with hero section's text, preventing a "jump" */
   align-items: center;
-  padding-bottom: 8vh; /* This value nudges the text up to match the hero's alignment */
   z-index: 9999;
   transition: opacity 1s ease;
 }
@@ -1092,8 +1090,11 @@ body::after {
 /* Font and base letter style */
 .loading-text span {
   font-family: "Special Gothic Expanded One", sans-serif;
-  font-size: 120px;
-  color: rgba(255, 255, 255, 0.1);
+  font-size: clamp(5rem, 15vw, 11rem);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.6);
   position: relative;
   display: inline-block;
   opacity: 0;
@@ -1106,6 +1107,7 @@ body::after {
   top: 0;
   left: 0;
   color: #1DCD9F;
+  -webkit-text-stroke: 1px #1DCD9F;
   opacity: 0;
 }
 
