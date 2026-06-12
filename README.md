@@ -1,3 +1,6 @@
+> **Portfolio classification: independently built product.** This repository contains the source for Aishwarya Anand's personal portfolio, including its visual system, animations, project storytelling, and GitHub-powered content.
+
+
 # 💼 Aishwarya's Portfolio Website
 
 A modern, responsive, and highly animated personal portfolio website showcasing my work and skills as a developer. Built from the ground up with HTML, CSS, and JavaScript, it leverages powerful libraries like GSAP and Particles.js to create a dynamic and engaging user experience.
